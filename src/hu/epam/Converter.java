@@ -17,21 +17,36 @@ public class Converter {
         String hundreds="";
         String tens ="";
         String ones="" ;
-        int residue = 0;
+        int residue = num;
 
         while (num !=0){
-            if(num >= 1000 && num <= 3999){
+            if(residue >= 1000 && residue <= 3999){
+                for (int j = 0; j < 1000;j++){
+                    residue = num - (1000 * j);
+                }
                 thousands = m[num / 1000];
-                residue = num;
-                
+
+
             }else if (residue >= 100 && residue <= 999){
+                for (int j = 0; j < 100;j++){
+                    num = num - (100 * j);
+                    residue = num;
+                }
                 hundreds = c[(num % 1000) / 100];
-                residue = num;
+
             }else if ( residue >= 10 && residue <= 99){
+                for (int j = 0; j < 10;j++){
+                    num = num - (100 * j);
+                    residue = num;
+                }
                 tens = x[(num % 100) / 10];
             }else if ( residue >= 0 && residue <=9){
+                for (int j = 0; j < 1000;j++){
+                    num = num - (100 * j);
+                    residue = num;
+                }
                 ones = i[num % 10];
-                num = residue;
+
             }else{
                 System.out.println("gáz van");
             }
