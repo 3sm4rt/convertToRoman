@@ -19,11 +19,14 @@ public class Converter {
         String ones="" ;
         int residue = num;
 
+
         while (num !=0){
             if(residue >= 1000 && residue <= 3999){
-                for (int j = 0; j < 1000;j++){
-                    residue = num - (1000 * j);
-                }
+
+                do{
+                    residue = num - 1000;
+                }while( num > 1000);
+                System.out.println(residue);
                 thousands = m[num / 1000];
 
 
