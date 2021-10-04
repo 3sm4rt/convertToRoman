@@ -11,52 +11,49 @@ public class Converter {
                 "L", "LX", "LXX", "LXXX", "XC"};
         String i[] = {"", "I", "II", "III", "IV",
                 "V", "VI", "VII", "VIII", "IX"};
+        // Változókat hozunk létre amikket folyamatosan növelünk a ciklusokba
+        int t = 0;
+        int h = 0;
+        int ten = 0;
+        int o = 0;
+        // Kód addig fut míg a num el nem éri a 0-t
+        if ( num <= 3999 && num >= 0){
 
+        while (num != 0) {
+            do {
+                num = num - 1000;  // a num értékét 1000-el csökkentjük míg a hátultesztő ciklus feltétele nem teljesül
+                t++; // minden lefutásnál növeljük a t értékét 1-el
+            } while (num >= 1000);
 
-        String thousands="";
-        String hundreds="";
-        String tens ="";
-        String ones="" ;
-        int residue = num;
+            do {
+                num = num - 100;
+                h++;
+            } while (num >= 100);
 
+            do{
+                num = num-10;
+                ten++;
+            }while ( num >= 10);
 
-        while (num !=0){
-            if(residue >= 1000 && residue <= 3999){
+            do{
+                num = num-1;
+                o++;
+            }while( num >= 1);
 
-                do{
-                    residue = num - 1000;
-                }while( num > 1000);
-                System.out.println(residue);
-                thousands = m[num / 1000];
-
-
-            }else if (residue >= 100 && residue <= 999){
-                for (int j = 0; j < 100;j++){
-                    num = num - (100 * j);
-                    residue = num;
-                }
-                hundreds = c[(num % 1000) / 100];
-
-            }else if ( residue >= 10 && residue <= 99){
-                for (int j = 0; j < 10;j++){
-                    num = num - (100 * j);
-                    residue = num;
-                }
-                tens = x[(num % 100) / 10];
-            }else if ( residue >= 0 && residue <=9){
-                for (int j = 0; j < 1000;j++){
-                    num = num - (100 * j);
-                    residue = num;
-                }
-                ones = i[num % 10];
-
-            }else{
-                System.out.println("gáz van");
-            }
+        }
+        }else{
+            System.out.println(" Kérlek 0 és 3999 közti értéket adj meg.");
         }
 
-        String ans = thousands + hundreds + tens + ones;
 
-        return ans;
+
+        String thousands = m[t];; // átadjuk a változók értékét ,hogy a tömb tudja melyik elemet szeretnénk megkapni
+        String hundreds = c[h];
+        String tens = x[ten];
+        String ones = i[o];
+
+        String ans = thousands + hundreds + tens + ones; // Összefűzzök a stringeket
+
+        return ans; // majd visszatérünk az értékével
     }
 }
